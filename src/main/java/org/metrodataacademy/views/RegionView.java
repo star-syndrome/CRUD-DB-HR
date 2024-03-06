@@ -18,15 +18,8 @@ public class RegionView {
 
     private final List<String> secondMenu = Arrays.asList(
             "1. Back To Main Menu", "2. Re-run Program", "99. Exit Program");
-    private final RegionController regionController = new RegionController();
 
-    public RegionView() {
-        try {
-            this.mainView();
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
+    private final RegionController regionController = new RegionController();
 
     public void mainView() {
         try {
@@ -40,7 +33,6 @@ public class RegionView {
             System.out.println("99. Exit");
             System.out.println();
             System.out.print("==>> ");
-
             int input = mainView.nextInt();
 
             switch (input) {
@@ -122,6 +114,7 @@ public class RegionView {
                     break;
             }
         } catch (Exception e) {
+            System.out.println();
             System.out.println("Error: " + e.getMessage());
             System.out.println();
             this.getAllRegions();
@@ -171,6 +164,7 @@ public class RegionView {
                     break;
             }
         } catch (Exception e) {
+            System.out.println();
             System.out.println("Error: " + e.getMessage());
             System.out.println();
             this.getRegionByID();
@@ -224,6 +218,7 @@ public class RegionView {
                     break;
             }
         } catch (Exception e) {
+            System.out.println();
             System.out.println("Error: " + e.getMessage());
             System.out.println();
             this.searchingRegionByName();
@@ -274,6 +269,7 @@ public class RegionView {
                     break;
             }
         } catch (Exception e) {
+            System.out.println();
             System.out.println("Error: " + e.getMessage());
             System.out.println();
             this.addRegion();
@@ -329,6 +325,7 @@ public class RegionView {
                     break;
             }
         } catch (Exception e) {
+            System.out.println();
             System.out.println("Error: " + e.getMessage());
             System.out.println();
             this.updateRegionName();
@@ -377,6 +374,7 @@ public class RegionView {
                     break;
             }
         } catch (Exception e) {
+            System.out.println();
             System.out.println("Error: " + e.getMessage());
             System.out.println();
             this.deleteRegionByID();
