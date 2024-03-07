@@ -1,6 +1,6 @@
 package org.metrodataacademy.views;
 
-import org.metrodataacademy.controller.RegionController;
+import org.metrodataacademy.controllers.RegionController;
 import org.metrodataacademy.models.Region;
 import org.metrodataacademy.models.request.CreateRegionRequest;
 import org.metrodataacademy.models.request.UpdateRegionRequest;
@@ -292,8 +292,9 @@ public class RegionView {
 
             UpdateRegionRequest request = UpdateRegionRequest.builder()
                     .name(name)
+                    .id(id)
                     .build();
-            regionController.update(request, id);
+            regionController.update(request);
 
             System.out.println();
             System.out.println("---------------------------------------------------------");

@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class UpdateRegionRequest {
 
     private String name;
+    private Integer id;
 }

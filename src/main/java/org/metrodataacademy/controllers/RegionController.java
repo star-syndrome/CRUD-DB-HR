@@ -1,4 +1,4 @@
-package org.metrodataacademy.controller;
+package org.metrodataacademy.controllers;
 
 import org.metrodataacademy.daos.RegionDAO;
 import org.metrodataacademy.models.Region;
@@ -44,13 +44,13 @@ public class RegionController {
         }
     }
 
-    public void update(UpdateRegionRequest request, Integer id) {
+    public void update(UpdateRegionRequest request) {
         if (request.getName().isEmpty()) {
             System.out.println("Region name must NotBlank!");
         } else if (request.getName().length() > 25) {
             System.out.println("Region name too long, maximum 25 characters!");
         } else {
-            regionDAO.updateRegion(request, id);
+            regionDAO.updateRegion(request);
         }
     }
 

@@ -8,7 +8,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class RegionDAO {
 
     private final Connection connection;
@@ -49,7 +48,7 @@ public class RegionDAO {
 
             int rows = preparedStatement.executeUpdate();
             if (rows > 0) {
-                System.out.println("Inserting new region successfully, new region: " + request.getName());
+                System.out.println("Inserting region successfully, new region: " + request.getName());
                 System.out.println("Updated Rows: " + rows);
             }
         } catch (Exception e) {
@@ -102,14 +101,14 @@ public class RegionDAO {
         return regions;
     }
 
-    public void updateRegion(UpdateRegionRequest request, Integer id) {
+    public void updateRegion(UpdateRegionRequest request) {
         String query = "UPDATE region r SET r.name = ? WHERE r.id = ?";
 
-        if (getRegionById(id) != null) {
+        if (getRegionById(request.getId()) != null) {
             try {
                 preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, request.getName());
-                preparedStatement.setInt(2, id);
+                preparedStatement.setInt(2, request.getId());
 
                 int rows = preparedStatement.executeUpdate();
                 if (rows > 0) {
