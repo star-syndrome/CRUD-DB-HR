@@ -1,5 +1,7 @@
 package org.metrodataacademy.daos;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.metrodataacademy.models.Region;
 import org.metrodataacademy.models.request.CreateRegionRequest;
 import org.metrodataacademy.models.request.UpdateRegionRequest;
@@ -8,9 +10,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
+@AllArgsConstructor
 public class RegionDAO {
 
-    private final Connection connection;
+    private Connection connection;
     private ResultSet resultSet;
     private PreparedStatement preparedStatement;
 
@@ -51,6 +55,20 @@ public class RegionDAO {
                 System.out.println("Inserting region successfully, new region: " + request.getName());
                 System.out.println("Updated Rows: " + rows);
             }
+        } catch (Exception e) {
+            throw new RuntimeException("Error: " + e.getMessage());
+        }
+    }
+
+    public boolean existsByRegionId(Integer id) {
+        String query = "SELECT * FROM region r WHERE r.id = ?";
+
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+
+            resultSet = preparedStatement.executeQuery();
+            return resultSet.next();
         } catch (Exception e) {
             throw new RuntimeException("Error: " + e.getMessage());
         }
@@ -104,7 +122,7 @@ public class RegionDAO {
     public void updateRegion(UpdateRegionRequest request) {
         String query = "UPDATE region r SET r.name = ? WHERE r.id = ?";
 
-        if (getRegionById(request.getId()) != null) {
+        if (existsByRegionId(request.getId())) {
             try {
                 preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, request.getName());
@@ -118,13 +136,15 @@ public class RegionDAO {
             } catch (Exception e) {
                 throw new RuntimeException("Error: " + e.getMessage());
             }
+        } else {
+            System.out.println("Region with ID: " + request.getId() + " not found!");
         }
     }
 
     public void deleteRegionById(Integer id) {
         String query = "DELETE FROM region r WHERE r.id = ?";
 
-        if (getRegionById(id) != null) {
+        if (existsByRegionId(id)) {
             try {
                 preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setInt(1, id);
@@ -137,6 +157,8 @@ public class RegionDAO {
             } catch (Exception e) {
                 throw new RuntimeException("Error: " + e.getMessage());
             }
+        } else {
+            System.out.println("Region with ID: " + id + " not found!");
         }
     }
 }

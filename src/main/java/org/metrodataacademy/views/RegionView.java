@@ -1,5 +1,7 @@
 package org.metrodataacademy.views;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.metrodataacademy.controllers.RegionController;
 import org.metrodataacademy.models.Region;
 import org.metrodataacademy.models.request.CreateRegionRequest;
@@ -9,7 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-
+@AllArgsConstructor
+@NoArgsConstructor
 public class RegionView {
 
     private final List<String> mainMenu = Arrays.asList(
@@ -19,54 +22,52 @@ public class RegionView {
     private final List<String> secondMenu = Arrays.asList(
             "1. Back To Main Menu", "2. Re-run Program", "99. Exit Program");
 
-    private final RegionController regionController = new RegionController();
+    private RegionController regionController = new RegionController();
 
     public void mainView() {
         try {
             Scanner mainView = new Scanner(System.in);
+            MainViews mainViews = new MainViews();
 
             System.out.println("-----------------------------------------------");
-            System.out.println("\tWelcome To Database db_hr Table Region!");
+            System.out.println("\t\t\tWelcome To Table Region!");
             System.out.println("-----------------------------------------------");
             mainMenu.forEach(region -> System.out.println(region.intern()));
             System.out.println("-----------------------------------------------");
+            System.out.println("98. Back To Main Views");
             System.out.println("99. Exit");
             System.out.println();
             System.out.print("==>> ");
             int input = mainView.nextInt();
+            System.out.println();
 
             switch (input) {
                 case 1:
-                    System.out.println();
                     getAllRegions();
                     break;
                 case 2:
-                    System.out.println();
                     getRegionByID();
                     break;
                 case 3:
-                    System.out.println();
                     searchingRegionByName();
                     break;
                 case 4:
-                    System.out.println();
                     addRegion();
                     break;
                 case 5:
-                    System.out.println();
                     updateRegionName();
                     break;
                 case 6:
-                    System.out.println();
                     deleteRegionByID();
                     break;
+                case 98:
+                    mainViews.play();
+                    break;
                 case 99:
-                    System.out.println();
                     System.out.println("Thank you!");
                     System.exit(0);
                     break;
                 default:
-                    System.out.println();
                     System.out.println("Please input an existing numbers!");
                     System.out.println();
                     this.mainView();
@@ -87,27 +88,25 @@ public class RegionView {
             System.out.println("\t\t\t\t\tGet All Regions");
             System.out.println("---------------------------------------------------------");
             regionController.getAll()
-                    .forEach(region -> System.out.println("Region ID: " + region.getId() +
-                            "\t| \t" + "Region Name: " + region.getName()));
+                    .forEach(region -> System.out.println("ID: " + region.getId() +
+                            ",  Name: " + region.getName()));
             System.out.println("---------------------------------------------------------");
             System.out.println("1. Back To Main Menu");
             System.out.println("2. Exit");
             System.out.println("---------------------------------------------------------");
-            System.out.println();
             System.out.print("==>> ");
             int input = getAll.nextInt();
+            System.out.println();
 
             switch (input) {
                 case 1:
                     this.mainView();
                     break;
                 case 2:
-                    System.out.println();
                     System.out.println("Thank you!");
                     System.exit(0);
                     break;
                 default:
-                    System.out.println();
                     System.out.println("Please input an existing numbers!");
                     System.out.println();
                     this.getAllRegions();
@@ -130,34 +129,28 @@ public class RegionView {
             System.out.print("Region ID: ");
             int id = getById.nextInt();
             System.out.println("---------------------------------------------------------");
-            System.out.println();
 
+            System.out.println();
             regionController.getById(id);
+            System.out.println();
 
-            System.out.println();
-            System.out.println("---------------------------------------------------------");
-            secondMenu.forEach(region -> System.out.println(region.intern()));
-            System.out.println("---------------------------------------------------------");
-            System.out.println();
-            System.out.print("==>> ");
+            secondMenu();
             int input = getById.nextInt();
+            System.out.println();
 
             switch (input) {
                 case 1:
                     this.mainView();
                     break;
                 case 2:
-                    System.out.println();
                     this.getRegionByID();
                     System.out.println();
                     break;
                 case 99:
-                    System.out.println();
                     System.out.println("Thank you!");
                     System.exit(0);
                     break;
                 default:
-                    System.out.println();
                     System.out.println("Please input an existing number!");
                     System.out.println();
                     this.getRegionByID();
@@ -178,40 +171,33 @@ public class RegionView {
             System.out.println("\t\t\t\tSearching Region By Name");
             System.out.println("---------------------------------------------------------");
             System.out.print("Region Name: ");
-            String name = searchingByName.nextLine();
+            String name = searchingByName .nextLine();
             System.out.println("---------------------------------------------------------");
-            System.out.println();
 
+            System.out.println();
             List<Region> regions = regionController.searchingByName(name);
             regions.forEach(
-                    region -> System.out.println("Region ID: " + region.getId() +
-                            "\t| \t" + "Region Name: " + region.getName())
+                    region -> System.out.println("ID: " + region.getId() + ",  Name: " + region.getName())
             );
+            System.out.println();
 
-            System.out.println();
-            System.out.println("---------------------------------------------------------");
-            secondMenu.forEach(region -> System.out.println(region.intern()));
-            System.out.println("---------------------------------------------------------");
-            System.out.println();
-            System.out.print("==>> ");
+            secondMenu();
             int input = searchingByName.nextInt();
+            System.out.println();
 
             switch (input) {
                 case 1:
                     this.mainView();
                     break;
                 case 2:
-                    System.out.println();
                     this.searchingRegionByName();
                     System.out.println();
                     break;
                 case 99:
-                    System.out.println();
                     System.out.println("Thank you!");
                     System.exit(0);
                     break;
                 default:
-                    System.out.println();
                     System.out.println("Please input an existing number!");
                     System.out.println();
                     this.searchingRegionByName();
@@ -234,35 +220,29 @@ public class RegionView {
             System.out.print("Region Name: ");
             String name = addRegion.nextLine();
             System.out.println("---------------------------------------------------------");
-            System.out.println();
 
+            System.out.println();
             CreateRegionRequest request = new CreateRegionRequest(name);
             regionController.create(request);
+            System.out.println();
 
-            System.out.println();
-            System.out.println("---------------------------------------------------------");
-            secondMenu.forEach(region -> System.out.println(region.intern()));
-            System.out.println("---------------------------------------------------------");
-            System.out.println();
-            System.out.print("==>> ");
+            secondMenu();
             int input = addRegion.nextInt();
+            System.out.println();
 
             switch (input) {
                 case 1:
                     this.mainView();
                     break;
                 case 2:
-                    System.out.println();
                     this.addRegion();
                     System.out.println();
                     break;
                 case 99:
-                    System.out.println();
                     System.out.println("Thank you!");
                     System.exit(0);
                     break;
                 default:
-                    System.out.println();
                     System.out.println("Please input an existing number!");
                     System.out.println();
                     this.addRegion();
@@ -280,7 +260,7 @@ public class RegionView {
         try {
             Scanner updateRegionName = new Scanner(System.in);
 
-            System.out.println("\t\t\t\tUpdate Region By Name");
+            System.out.println("\t\t\t\t\tUpdate Region Name");
             System.out.println("---------------------------------------------------------");
             System.out.println("Region ID is the region ID whose region name you want to update.");
             System.out.print("Region ID: ");
@@ -288,38 +268,32 @@ public class RegionView {
             System.out.print("Region Name: ");
             String name = updateRegionName.nextLine();
             System.out.println("---------------------------------------------------------");
-            System.out.println();
 
+            System.out.println();
             UpdateRegionRequest request = UpdateRegionRequest.builder()
                     .name(name)
                     .id(id)
                     .build();
             regionController.update(request);
+            System.out.println();
 
-            System.out.println();
-            System.out.println("---------------------------------------------------------");
-            secondMenu.forEach(region -> System.out.println(region.intern()));
-            System.out.println("---------------------------------------------------------");
-            System.out.println();
-            System.out.print("==>> ");
+            secondMenu();
             int input = updateRegionName.nextInt();
+            System.out.println();
 
             switch (input) {
                 case 1:
                     this.mainView();
                     break;
                 case 2:
-                    System.out.println();
                     this.updateRegionName();
                     System.out.println();
                     break;
                 case 99:
-                    System.out.println();
                     System.out.println("Thank you!");
                     System.exit(0);
                     break;
                 default:
-                    System.out.println();
                     System.out.println("Please input an existing number!");
                     System.out.println();
                     this.updateRegionName();
@@ -342,17 +316,14 @@ public class RegionView {
             System.out.print("Region ID: ");
             int id = deleteRegion.nextInt();
             System.out.println("---------------------------------------------------------");
-            System.out.println();
 
+            System.out.println();
             regionController.delete(id);
+            System.out.println();
 
-            System.out.println();
-            System.out.println("---------------------------------------------------------");
-            secondMenu.forEach(region -> System.out.println(region.intern()));
-            System.out.println("---------------------------------------------------------");
-            System.out.println();
-            System.out.print("==>> ");
+            secondMenu();
             int input = deleteRegion.nextInt();
+            System.out.println();
 
             switch (input) {
                 case 1:
@@ -363,12 +334,10 @@ public class RegionView {
                     System.out.println();
                     break;
                 case 99:
-                    System.out.println();
                     System.out.println("Thank you!");
                     System.exit(0);
                     break;
                 default:
-                    System.out.println();
                     System.out.println("Please input an existing number!");
                     System.out.println();
                     this.deleteRegionByID();
@@ -380,5 +349,12 @@ public class RegionView {
             System.out.println();
             this.deleteRegionByID();
         }
+    }
+
+    public void secondMenu() {
+        System.out.println("---------------------------------------------------------");
+        secondMenu.forEach(region -> System.out.println(region.intern()));
+        System.out.println("---------------------------------------------------------");
+        System.out.print("==>> ");
     }
 }
