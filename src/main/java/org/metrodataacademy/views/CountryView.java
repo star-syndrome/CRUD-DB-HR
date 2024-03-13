@@ -71,7 +71,7 @@ public class CountryView {
                     System.out.println("Thank you!");
                     System.exit(0);
                     break;
-                default: ;
+                default:
                     System.out.println("Please input an existing numbers!");
                     System.out.println();
                     this.mainView();
