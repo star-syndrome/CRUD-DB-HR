@@ -21,9 +21,9 @@ public class CountryController {
 
     public void create(CreateCountryRequest request) {
         if (request.getName().length() > 40) {
-            System.out.println("Country name too long!");
+            System.out.println("Country name too long, maximum 40 characters!");
         } else if (request.getId().length() > 4) {
-            System.out.println("Country ID too long!");
+            System.out.println("Country ID too long, maximum 4 characters!");
         } else if (request.getName().isEmpty()) {
             System.out.println("Country name must NotBlank!");
         } else if (request.getId().isEmpty()) {
@@ -71,9 +71,9 @@ public class CountryController {
 
     public void updateCountry(UpdateCountryRequest request) {
         if (request.getName().length() > 40) {
-            System.out.println("Country name too long!");
+            System.out.println("Country name too long, maximum 40 characters!");
         } else if (request.getId().length() > 4) {
-            System.out.println("Country ID too long!");
+            System.out.println("Country ID too long, maximum 4 characters!");
         } else if (request.getName().isEmpty()) {
             System.out.println("Country name must NotBlank!");
         } else if (request.getId().isEmpty()) {
@@ -87,7 +87,7 @@ public class CountryController {
         if (id.isEmpty()) {
             System.out.println("Country ID must NotBlank!");
         } else if (id.length() > 4) {
-            System.out.println("Country ID too long!");
+            System.out.println("Country ID too long, maximum 4 characters!");
         } else {
             countryDAO.deleteCountryByID(id);
         }

@@ -21,13 +21,13 @@ public class LocationController {
 
     public void create(CreateLocationRequest request) {
         if (request.getStreetAddress().length() > 40) {
-            System.out.println("Street Address too long!");
+            System.out.println("Street Address too long, maximum 40 characters!");
         } else if (request.getPostalCode().length() > 12) {
-            System.out.println("Postal Code too long!");
+            System.out.println("Postal Code too long, maximum 12 characters!");
         } else if (request.getStateProvince().length() > 25) {
-            System.out.println("State Province too long!");
+            System.out.println("State Province too long, maximum 25 characters!");
         } else if (request.getCity().length() > 30) {
-            System.out.println("City too long!");
+            System.out.println("City too long, maximum 30 characters!");
         } else if (request.getStreetAddress().isEmpty()) {
             System.out.println("Street Address must NotBlank!");
         } else if (request.getPostalCode().isEmpty()) {
@@ -76,13 +76,13 @@ public class LocationController {
 
     public void update(UpdateLocationRequest request) {
         if (request.getStreetAddress().length() > 40) {
-            System.out.println("Street Address too long!");
+            System.out.println("Street Address too long, maximum 40 characters!");
         } else if (request.getPostalCode().length() > 12) {
-            System.out.println("Postal Code too long!");
+            System.out.println("Postal Code too long, maximum 12 characters!");
         } else if (request.getStateProvince().length() > 25) {
-            System.out.println("State Province too long!");
+            System.out.println("State Province too long, maximum 25 characters!");
         } else if (request.getCity().length() > 30) {
-            System.out.println("City too long!");
+            System.out.println("City too long, maximum 30 characters!");
         } else if (request.getStreetAddress().isEmpty()) {
             System.out.println("Street Address must NotBlank!");
         } else if (request.getPostalCode().isEmpty()) {
