@@ -1,10 +1,10 @@
 package org.metrodataacademy;
 
-import org.metrodataacademy.views.RegionView;
+import org.metrodataacademy.views.MainViews;
 
 public class Main {
     public static void main(String[] args) {
-        RegionView regionView = new RegionView();
-        regionView.mainView();
+        MainViews mainViews = new MainViews();
+        mainViews.play();
     }
 }
